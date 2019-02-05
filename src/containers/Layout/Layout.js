@@ -4,13 +4,26 @@ import Toolbar from '../../components/Navigation/Toolbar/Toolbar'
 import classes from './Layout.module.css'
 import Sidebar from '../../components/Navigation/Sidebar/Sidebar'
 class Layout extends Component {
-render() {
+          state = {
+               showSideDrawer: true
+          }
 
-            return(
+     sideDrawerClosedHandler = () => {
+          this.setState({
+               showSideDrawer:false
+          });
+     }
+
+     sideDrawToggleHandler = () => {
+          this.setState((prevState) => {
+               return {showSideDrawer: !prevState.showSideDrawer}
+          });
+     }
+render() {
+return(
             <Auxx>
-                 <Toolbar />
-                 <Sidebar />
-            <div>Sidebar Backdrop</div>
+                 <Toolbar drawtoggle = {this.sideDrawToggleHandler}/>
+                 <Sidebar closed = {this.sideDrawerClosedHandler} open = {this.state.showSideDrawer} />
             <main className = {classes.Content}>{this.props.children}</main>
             </Auxx>
 
